@@ -238,16 +238,6 @@ def build_html(events):
 <meta name="twitter:description" content="Explore operational history and archival records of OSS Jedburghs Team Augustus.">
 <meta name="twitter:image" content="https://teamaugust.us/ossmedal.png">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FEDSBJB4CZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FEDSBJB4CZ');
-</script>
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { scroll-behavior: smooth; }
