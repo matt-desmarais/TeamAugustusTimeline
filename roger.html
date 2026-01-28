@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Roger – OSS Jedburghs: Team Augustus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FEDSBJB4CZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FEDSBJB4CZ');
+</script>
+  <style>
+
+.full-width-photo {
+  margin-top: 2.5rem;
+}
+
+.full-width-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(70, 60, 40, 0.9);
+  box-shadow:
+    0 12px 22px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  filter: sepia(0.35) contrast(1.05);
+  cursor: zoom-in;
+}
+
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(0,0,0,0.5), #151311 80%);
+      color: #f4f0e4;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 0.25rem;
+      font-size: 2rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f4f0e4;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #b9b2a0;
+      margin-bottom: 0.6rem;
+    }
+
+    /* back to timeline link (small, under subtitle) */
+    .back-link-wrap {
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .back-link {
+      font-family: "Courier New", monospace;
+      font-size: 1.5rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f4f0e4;
+      text-decoration: none;
+      opacity: 0.9;
+      border-bottom: 1px solid rgba(244,240,228,0.45);
+      padding-bottom: 0.08rem;
+    }
+
+    .back-link:hover {
+      opacity: 1;
+      border-bottom-color: #f4f0e4;
+    }
+
+    /* site nav (same as about/reports) */
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 2.25rem;
+    }
+
+    .site-nav a {
+      color: #f4f0e4;
+      text-decoration: none;
+      padding: 0.2rem 1.2rem;
+      border-bottom: 1px solid transparent;
+      opacity: 0.85;
+      transition: border-color 0.12s ease-out, opacity 0.12s ease-out;
+    }
+
+    .site-nav a:hover {
+      border-color: #f4f0e4;
+      opacity: 1;
+    }
+
+    .site-nav a.active {
+      border-color: #f4f0e4;
+      opacity: 1;
+    }
+
+    .content-card {
+      background: #f4ecd5;
+      border-radius: 0.5rem;
+      padding: 1.5rem 1.75rem 2rem;
+      border: 1px solid rgba(70, 60, 40, 0.9);
+      box-shadow:
+        0 16px 26px rgba(0, 0, 0, 0.7),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      color: #3c2d1b;
+    }
+
+    .content-card h2 {
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: #5b4a32;
+    }
+
+    .content-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .photo-grid figure {
+      background: #f7f2e2;
+      border: 1px solid rgba(70, 60, 40, 0.9);
+      border-radius: 0.45rem;
+      padding: 0.6rem;
+      text-align: center;
+      box-shadow:
+        0 8px 14px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .photo-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.35rem;
+      cursor: zoom-in;
+      filter: sepia(0.38) contrast(1.05);
+    }
+
+    .photo-grid figcaption {
+      margin-top: 0.5rem;
+      font-family: "Courier New", monospace;
+      font-size: 0.8rem;
+      color: #4a3825;
+      opacity: 0.9;
+    }
+
+    .page-footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9d9482;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    /* fullscreen overlay */
+    .fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      cursor: zoom-out;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease-out;
+    }
+
+    .fullscreen-overlay.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .fullscreen-overlay img {
+      max-width: 95vw;
+      max-height: 95vh;
+      box-shadow: 0 0 40px rgba(0,0,0,0.9);
+      border-radius: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.25rem 0.75rem;
+      }
+      .site-nav {
+        gap: 1.2rem;
+        font-size: 0.72rem;
+      }
+    }
+
+
+    .fullwidth-photo {
+      margin-top: 2.5rem;
+      background: #f7f2e2;
+      border: 1px solid rgba(70, 60, 40, 0.9);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      box-shadow:
+        0 14px 24px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .fullwidth-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.4rem;
+      cursor: zoom-in;
+      filter: sepia(0.38) contrast(1.05);
+    }
+
+    .fullwidth-photo figcaption {
+      margin-top: 0.75rem;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+      color: #4a3825;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- fullscreen overlay -->
+  <div id="fullscreen-overlay" class="fullscreen-overlay">
+    <picture>
+      <img id="fullscreen-image" alt="">
+    </picture>
+  </div>
+
+  <main class="page">
+    <h1>OSS Jedburghs: Team Augustus</h1>
+    <p class="subtitle">Operational Timeline &amp; Archival Records</p>
+
+    <div class="back-link-wrap">
+      <a class="back-link" href="timeline.html">Back to Timeline</a>
+    </div>
+
+    <nav class="site-nav">
+      <a href="about.html">About</a>
+      <a href="reports.html">Reports</a>
+      <a href="roger.html" class="active">Roger</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+
+    <section class="content-card">
+      <h2>Roger Before the War</h2>
+      <p>
+        A glimpse into Roger’s life before joining the OSS: family, childhood, and the world he grew up in.
+      </p>
+
+      <div class="photo-grid">
+        <!-- Roger-numbered series -->
+        <figure><img src="images/roger/Roger7.jpg" alt="Roger #7" onclick="openFullscreen('images/roger/Roger7.jpg','Roger #7')"><figcaption></figcaption></figure>
+        <figure><img src="images/roger/Roger8.jpg" alt="Roger #8" onclick="openFullscreen('images/roger/Roger8.jpg','Roger #8')"><figcaption></figcaption></figure>
+        <figure><img src="images/roger/Roger9.jpg" alt="Roger #9" onclick="openFullscreen('images/roger/Roger9.jpg','Roger #9')"><figcaption></figcaption></figure>
+        <figure><img src="images/roger/RogerSisters.jpg" alt="Roger & Sisters" onclick="openFullscreen('images/roger/RogerSisters.jpg','Roger & Sisters')"><figcaption>Violette, Roger, Zita</figcaption></figure>
+        <figure><img src="images/roger/Roger13.jpg" alt="Roger #13" onclick="openFullscreen('images/roger/Roger13.jpg','Roger #13')"><figcaption>Roger age 13</figcaption></figure>
+        <figure><img src="images/roger/Roger14.jpg" alt="Roger #14" onclick="openFullscreen('images/roger/Roger14.jpg','Roger #14')"><figcaption>Roger age 14</figcaption></figure>
+        <figure><img src="images/roger/Roger15.jpg" alt="Roger #15" onclick="openFullscreen('images/roger/Roger15.jpg','Roger #15')"><figcaption>Roger age 15</figcaption></figure>
+        <figure><img src="images/roger/Roger16.jpg" alt="Roger #16" onclick="openFullscreen('images/roger/Roger16.jpg','Roger #16')"><figcaption>Roger age 16</figcaption></figure>
+
+        <figure><img src="images/roger/Rogerdog.jpg" alt="Roger Dog" onclick="openFullscreen('images/roger/Rogerdog.jpg','Roger Dog')"><figcaption>Roger &amp; dog 1943</figcaption></figure>
+        <figure><img src="images/roger/RogerL2.jpg" alt="Roger L2" onclick="openFullscreen('images/roger/RogerL2.jpg','Roger L2')"><figcaption>Roger L2</figcaption></figure>
+        <figure><img src="images/roger/RogerL3.jpg" alt="Roger L3" onclick="openFullscreen('images/roger/RogerL3.jpg','Roger L3')"><figcaption>Roger L3</figcaption></figure>
+        <figure><img src="images/roger/RogerL4.jpg" alt="Roger L4" onclick="openFullscreen('images/roger/RogerL4.jpg','Roger L4')"><figcaption>Roger L4</figcaption></figure>
+        <figure><img src="images/roger/RogerR10.jpg" alt="Roger R10" onclick="openFullscreen('images/roger/RogerR10.jpg','Roger R10')"><figcaption>Roger R10</figcaption></figure>
+        <figure><img src="images/roger/RogerR12.jpg" alt="Roger R12" onclick="openFullscreen('images/roger/RogerR12.jpg','Roger R12')"><figcaption>Roger R12</figcaption></figure>
+        <figure><img src="images/roger/Roger11.jpg" alt="Roger 1944" onclick="openFullscreen('images/roger/Roger11.jpg','Roger 1944')"><figcaption>Roger 1944</figcaption></figure>
+      </div>
+
+<!--
+<div class="full-width-photo">
+  <img
+    src="images/roger/medals.jpg"
+    alt="Roger’s medals"
+    onclick="openFullscreen('images/roger/medals.jpg','Roger’s medals')"
+  >
+</div>
+-->
+
+    </section>
+
+    <!-- Medal photo -->
+    <figure class="fullwidth-photo">
+      <img
+        src="images/roger/medals.jpg"
+        alt="Left: Aime Desmarais, Center: Roger Cote, Right: Elzear Cote"
+        onclick="openFullscreen('images/roger/medals.jpg','Aime Desmarais, Roger Cote, Elzear Cote')"
+      >
+      <figcaption>
+        Left: Aime Desmarais (Violette’s Husband)<br>
+        Center: Roger Cote<br>
+        Right: Elzear Cote (Roger’s Father)
+      </figcaption>
+    </figure>
+
+    <p class="page-footer">
+      Office Of Strategic Services &mdash; Declassified Reproduction
+    </p>
+  </main>
+
+  <script>
+    const fullscreenOverlay = document.getElementById("fullscreen-overlay");
+    const fullscreenImage   = document.getElementById("fullscreen-image");
+
+    function openFullscreen(src, alt) {
+      fullscreenImage.src = src;
+      fullscreenImage.alt = alt || "";
+      fullscreenOverlay.classList.add("is-visible");
+    }
+
+    function closeFullscreen() {
+      fullscreenOverlay.classList.remove("is-visible");
+      setTimeout(() => { fullscreenImage.src = ""; }, 350);
+    }
+
+    fullscreenOverlay.addEventListener("click", closeFullscreen);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
