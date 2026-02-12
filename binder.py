@@ -1,7 +1,7 @@
 import os
 
 # Folders and output
-IMAGE_FOLDER = "images"
+IMAGE_FOLDER = "images/binder"
 OUTPUT_FILE = "binder.html"
 
 # Grab images
