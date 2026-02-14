@@ -1,4 +1,5 @@
 import os
+import json
 
 # Folders and output
 IMAGE_FOLDER = "images/binder"
@@ -10,13 +11,16 @@ images = sorted([
     if f.lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".webp"))
 ])
 
-# HTML with proper f-string escaping
+if not images:
+    print("No images found in folder.")
+    exit()
+
 html = f"""<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Interactive Side-View Binder</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {{
     margin: 0;
@@ -28,20 +32,24 @@ body {{
     font-family: Arial, sans-serif;
     min-height: 100vh;
 }}
+
 .slider-container {{
     width: 90%;
     max-width: 1100px;
     margin-bottom: 10px;
     display: none;
 }}
+
 input[type=range] {{
     width: 100%;
 }}
+
 .binder-container {{
     perspective: 1500px;
     width: 90%;
     max-width: 1100px;
 }}
+
 .binder {{
     width: 100%;
     height: 0;
@@ -49,6 +57,7 @@ input[type=range] {{
     position: relative;
     cursor: pointer;
 }}
+
 .page {{
     width: 50%;
     height: 100%;
@@ -65,14 +74,17 @@ input[type=range] {{
     transition: opacity 0.5s ease;
     z-index: 10;
 }}
+
 .page img {{
     max-width: 95%;
     max-height: 95%;
     object-fit: contain;
     cursor: zoom-in;
 }}
+
 .left-page {{ left: 0; }}
 .right-page {{ right: 0; }}
+
 .right-cover {{
     width: 50%;
     height: 100%;
@@ -86,14 +98,15 @@ input[type=range] {{
     transition: transform 1s ease, z-index 0s 1s;
     z-index: 20;
 }}
+
 .right-cover.open {{
     transform: rotateY(180deg);
     z-index: 0;
 }}
+
 .ring {{
     width: 2.2%;
     max-width: 24px;
-    height: auto;
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: 4px solid silver;
@@ -107,6 +120,7 @@ input[type=range] {{
     transition: opacity 0.5s ease 0.5s;
     z-index: 15;
 }}
+
 .ring1 {{ top: 20.1%; }}
 .ring2 {{ top: 47.7%; }}
 .ring3 {{ top: 75.3%; }}
@@ -118,6 +132,7 @@ input[type=range] {{
     max-width: 1100px;
     margin-top: 8px;
 }}
+
 button {{
     padding: 10px 15px;
     margin: 0 5px;
@@ -126,24 +141,16 @@ button {{
     background: #333;
     color: white;
     cursor: pointer;
-    font-size: 14px;
 }}
+
 button:hover {{
     background: #555;
 }}
+
 .page-info {{
     margin-top: 8px;
     font-size: 12px;
     color: #333;
-}}
-@media (max-width: 600px) {{
-    button {{
-        font-size: 12px;
-        padding: 8px 12px;
-    }}
-    .page-info {{
-        font-size: 11px;
-    }}
 }}
 
 #fullscreenOverlay {{
@@ -158,18 +165,18 @@ button:hover {{
     align-items: center;
     z-index: 9999;
 }}
+
 #fullscreenOverlay img {{
     max-width: 95%;
     max-height: 95%;
     object-fit: contain;
-    cursor: zoom-out;
 }}
 </style>
 </head>
 <body>
 
 <div class="slider-container">
-    <input type="range" id="pageSlider" min="0" max="{max(len(images)-2,0)}" step="2">
+    <input type="range" id="pageSlider" min="0" max="{max(len(images)-2,0)}" step="1">
 </div>
 
 <div class="binder-container">
@@ -196,11 +203,10 @@ button:hover {{
 <div id="fullscreenOverlay"><img id="fullscreenImg"></div>
 
 <script>
-var images = {images};
+var images = {json.dumps(images)};
 var basePath = "{IMAGE_FOLDER}/";
 
-// currentIndex tracks left page of normal spreads
-var currentIndex = 1; // starts at second spread
+var currentIndex = 1;
 var firstSpread = true;
 
 var leftPage = document.getElementById("leftPage");
@@ -210,6 +216,10 @@ var slider = document.getElementById("pageSlider");
 var rightCover = document.getElementById("rightCover");
 var controls = document.querySelector(".controls");
 var sliderContainer = document.querySelector(".slider-container");
+
+var leftPageDiv = document.querySelector(".left-page");
+var rightPageDiv = document.querySelector(".right-page");
+
 var pages = document.querySelectorAll(".page");
 var rings = document.querySelectorAll(".ring");
 
@@ -233,10 +243,16 @@ function renderSpread() {{
 function nextSpread() {{
     if (firstSpread) {{
         firstSpread = false;
-        currentIndex = 1; // left = image 1, right = image 2
+        currentIndex = 1;
+
+        // Reveal both pages now
+        leftPageDiv.style.opacity = 1;
+        rightPageDiv.style.opacity = 1;
+
         renderSpread();
         return;
     }}
+
     if (currentIndex + 2 < images.length) {{
         currentIndex += 2;
         renderSpread();
@@ -246,9 +262,15 @@ function nextSpread() {{
 function prevSpread() {{
     if (!firstSpread && currentIndex - 2 < 1) {{
         firstSpread = true;
+
+        // Hide left page again
+        leftPageDiv.style.opacity = 0;
+        rightPageDiv.style.opacity = 1;
+
         renderSpread();
         return;
     }}
+
     if (currentIndex - 2 >= 1) {{
         currentIndex -= 2;
         renderSpread();
@@ -257,18 +279,28 @@ function prevSpread() {{
 
 slider.addEventListener("input", function() {{
     var val = parseInt(slider.value);
+
     if (val === 0) {{
         firstSpread = true;
+        leftPageDiv.style.opacity = 0;
+        rightPageDiv.style.opacity = 1;
     }} else {{
         firstSpread = false;
         currentIndex = val;
+        leftPageDiv.style.opacity = 1;
+        rightPageDiv.style.opacity = 1;
     }}
+
     renderSpread();
 }});
 
 rightCover.addEventListener("click", function(e) {{
     rightCover.classList.add("open");
-    pages.forEach(p => p.style.opacity = 1);
+
+    // Only show right page initially
+    rightPageDiv.style.opacity = 1;
+    leftPageDiv.style.opacity = 0;
+
     rings.forEach(r => r.style.opacity = 1);
     controls.style.display = "block";
     sliderContainer.style.display = "block";
@@ -283,11 +315,12 @@ document.addEventListener("keydown", function(e) {{
     if (e.key === "ArrowLeft") prevSpread();
 }});
 
-// Fullscreen click
+// Fullscreen
 function toggleFullscreen(src) {{
     fullscreenImg.src = src;
     fullscreenOverlay.style.display = "flex";
 }}
+
 pages.forEach(page => {{
     page.addEventListener("click", function(e) {{
         var img = page.querySelector("img");
@@ -295,49 +328,10 @@ pages.forEach(page => {{
         e.stopPropagation();
     }});
 }});
+
 fullscreenOverlay.addEventListener("click", function() {{
     fullscreenOverlay.style.display = "none";
 }});
-
-// Mobile swipe support
-let startX = 0;
-pages.forEach(page => {{
-    page.addEventListener("touchstart", e => {{
-        startX = e.touches[0].clientX;
-    }});
-    page.addEventListener("touchend", e => {{
-        let endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) prevSpread();
-        else if (startX - endX > 50) nextSpread();
-    }});
-}});
-
-// Pinch-to-zoom (simplified)
-let initialDist = 0;
-pages.forEach(page => {{
-    page.addEventListener("touchstart", e => {{
-        if(e.touches.length == 2) {{
-            let dx = e.touches[0].clientX - e.touches[1].clientX;
-            let dy = e.touches[0].clientY - e.touches[1].clientY;
-            initialDist = Math.sqrt(dx*dx + dy*dy);
-        }}
-    }});
-    page.addEventListener("touchmove", e => {{
-        if(e.touches.length == 2) {{
-            let dx = e.touches[0].clientX - e.touches[1].clientX;
-            let dy = e.touches[0].clientY - e.touches[1].clientY;
-            let dist = Math.sqrt(dx*dx + dy*dy);
-            let scale = dist / initialDist;
-            let img = page.querySelector("img");
-            if(img) img.style.transform = "scale(" + scale + ")";
-        }}
-    }});
-    page.addEventListener("touchend", e => {{
-        let img = page.querySelector("img");
-        if(img) img.style.transform = "scale(1)";
-    }});
-}});
-
 </script>
 
 </body>
@@ -347,4 +341,4 @@ pages.forEach(page => {{
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"Interactive binder (page 1 right, then normal spreads) generated: {OUTPUT_FILE}")
+print(f"Interactive binder generated: {OUTPUT_FILE}")
